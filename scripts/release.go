@@ -4,6 +4,7 @@ package main
 import (
 	"archive/tar"
 	"archive/zip"
+	"bytes"
 	"compress/gzip"
 	"crypto/sha256"
 	"encoding/hex"
@@ -263,6 +264,9 @@ func copyTree(source, destination string) error {
 		data, err := os.ReadFile(path)
 		if err != nil {
 			return err
+		}
+		if strings.HasSuffix(path, ".json") && bytes.Contains(data, []byte("\r\n")) {
+			return fmt.Errorf("release JSON must use LF line endings: %s", path)
 		}
 		return os.WriteFile(target, data, 0644)
 	})

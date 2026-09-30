@@ -15,6 +15,8 @@ Each archive is named `td-profile-<release>-<os>-<arch>`. Linux and macOS use `.
 
 The script extracts the archive into a temporary directory outside the checkout. It verifies that the empty `game-data/` exists and passes with zero files. It verifies the included synthetic example and requires a complete score of 100. It then deletes `profile/mechanics.json` and requires a failure identifying that missing dependency. These checks never change the archived Profile or empty data directory.
 
+Git checks out text with LF line endings on every platform. The packager rejects CRLF in bundled JSON instead of changing its bytes. This keeps the matching Profile's dependency digest identical across native archives.
+
 `release.json` records the release tag, checker version and interface, Profile id, revision, format version and dependency SHA256, source commit, native target, Go version and disabled CGO. The Profile digest comes from the checker report. It hashes the resolved Profile dependencies, not the archive. The release tag, checker version and Profile revision are independent versions.
 
 The adjacent `.sha256` file records the SHA256 of the archive bytes. Verify it before extracting on Linux:

@@ -4,8 +4,29 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 )
+
+func TestCopyTreeJSONLineEndings(t *testing.T) {
+	for _, test := range []struct{ name, lineEnding string }{{"LF", "\n"}, {"CRLF", "\r\n"}} {
+		t.Run(test.name, func(t *testing.T) {
+			work := t.TempDir()
+			source := filepath.Join(work, "manifest.json")
+			if err := os.WriteFile(source, []byte("{}"+test.lineEnding), 0644); err != nil {
+				t.Fatal(err)
+			}
+			err := copyTree(source, filepath.Join(work, "copied.json"))
+			if test.lineEnding == "\r\n" {
+				if err == nil || !strings.Contains(err.Error(), "LF line endings") {
+					t.Fatalf("CRLF must fail with a useful diagnostic: %v", err)
+				}
+			} else if err != nil {
+				t.Fatal(err)
+			}
+		})
+	}
+}
 
 func TestArchiveRoundTrip(t *testing.T) {
 	for _, extension := range []string{".tar.gz", ".zip"} {

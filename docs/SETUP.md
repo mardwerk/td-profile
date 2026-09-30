@@ -24,4 +24,4 @@ Atlas compatibility checks cover 10,053 files and 482,492 model instances, with 
 
 Linux runtime checks passed locally. The first release workflow also passed native Linux and macOS packaging, but Windows exposed a copied schema-loader bug. Checker `5.0.1` converts native drive paths to correctly escaped file URLs and back before checking containment. Regression tests preserve rejection of foreign hosts and paths outside the Profile.
 
-Release `v1.0.1` requires all three native packaging jobs to pass before publication. The failed `v1.0.0` tag is retained without downloadable releases. A cross-build alone does not establish that an archive runs on its target.
+Release `v1.0.1` passed all three native packaging jobs. Downloaded assets passed checksum verification, and the Linux binary validated empty data and scored the example at 100. Windows checkout line endings changed the bundled Profile bytes and its digest. Release `v1.0.2` requires LF checkouts and rejects CRLF in bundled JSON. The failed `v1.0.0` tag is retained without downloadable releases. A cross-build alone does not establish that an archive runs on its target.
