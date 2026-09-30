@@ -11,3 +11,15 @@ The starter uses native generic fields and a small explicit progression. Empty d
 Release archives contain the executable beside its matching Profile, an empty game-data directory, source notices and machine-readable release identity. Keep binaries out of Git. Version the bundle, checker and Profile independently, and record the tested pair.
 
 Before public publication, run tests, race checks, vet, native builds and a release archive smoke test outside the checkout. Verify the empty directory, the example, a partial Tower score and a broken dependency. Verify the extracted checker against Atlas's unchanged accepted capture. Record actual results below before publication.
+
+## Verification
+
+Tests, race checks, vet and native builds passed. All 25 reusable schemas and 17 checker implementation files match the merged Atlas source byte-for-byte. Synthetic test fixtures adapt to the new Template without relying on BTD6 settings.
+
+The empty directory passes with zero files. The synthetic game checks five files, eight references and 21 canonical model instances. Its Tower scores 100/100. Regression tests reject missing upgrades, missing states, wrong values and unknown mechanics; those failures produce partial scores. Unrelated malformed data does not change the selected Tower's report.
+
+The Linux amd64 archive runs outside the checkout, with its Profile, source notices, documentation and example included. Its game-data directory is actually empty. The archive smoke test validates the empty directory and example, checks a score of 100 and rejects a removed Profile dependency. The Profile dependency digest is `981def0d205941af5535501f93b19abfa73254bb1331f4db1f42647975dae5a7`.
+
+Atlas compatibility checks cover 10,053 files and 482,492 model instances, with no unbound instances. Integrity passes. The sole error is the accepted capture's existing duplicate Boomerang purchase. Dart scores 100. The accepted capture and exporter remain unchanged.
+
+Linux runtime checks passed locally. Windows amd64 and macOS arm64 packaging requires the native release workflow checks. A cross-build alone does not establish that an archive runs on its target.

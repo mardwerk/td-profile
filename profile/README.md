@@ -14,10 +14,4 @@ The Template validates canonical shapes, required mapped fields, layouts, refere
 
 The score measures declared data compliance. It does not measure gameplay balance or simulate combat. An isolated Tower score follows its family and declared dependencies; unrelated malformed files do not affect it. Validate all game-data separately when checking the whole corpus.
 
-Run from the repository root:
-
-```sh
-go run ./cmd/atlas-validator --data game-data --profile profile
-go run ./cmd/atlas-validator --data examples/minimal-game/game-data --profile profile
-go run ./cmd/atlas-validator score-tower --game-data examples/minimal-game/game-data --profile profile --tower Towers/Bolt/Bolt-0.json
-```
+See [the project README](../README.md#use) for commands that use a downloaded bundle or a source build.
