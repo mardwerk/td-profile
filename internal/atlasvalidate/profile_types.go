@@ -4,7 +4,7 @@ import "github.com/google/jsonschema-go/jsonschema"
 
 const profileFormatVersion = 5
 const validatorFormatVersion = 5
-const Version = "5.0.0"
+const Version = "5.0.1"
 
 type documentRef struct {
 	File, Schema string

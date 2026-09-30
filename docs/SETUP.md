@@ -14,7 +14,7 @@ Before public publication, run tests, race checks, vet, native builds and a rele
 
 ## Verification
 
-Tests, race checks, vet and native builds passed. All 25 reusable schemas match the merged Atlas source byte-for-byte. The extracted checking operations are unchanged; the command and reported checker name use `validator`. Synthetic test fixtures adapt to the new Template without relying on BTD6 settings.
+Tests, race checks, vet and native builds passed. All 25 reusable schemas match the merged Atlas source byte-for-byte. The command and reported checker name use `validator`. Synthetic test fixtures adapt to the new Template without relying on BTD6 settings.
 
 The empty directory passes with zero files. The synthetic game checks five files, eight references and 21 canonical model instances. Its Tower scores 100/100. Regression tests reject missing upgrades, missing states, wrong values and unknown mechanics; those failures produce partial scores. Unrelated malformed data does not change the selected Tower's report.
 
@@ -22,4 +22,6 @@ The Linux amd64 archive runs outside the checkout, with its Profile, source noti
 
 Atlas compatibility checks cover 10,053 files and 482,492 model instances, with no unbound instances. Integrity passes. The sole error is the accepted capture's existing duplicate Boomerang purchase. Dart scores 100. The accepted capture and exporter remain unchanged.
 
-Linux runtime checks passed locally. Windows amd64 and macOS arm64 packaging requires the native release workflow checks. A cross-build alone does not establish that an archive runs on its target.
+Linux runtime checks passed locally. The first release workflow also passed native Linux and macOS packaging, but Windows exposed a copied schema-loader bug. Checker `5.0.1` converts native drive paths to correctly escaped file URLs and back before checking containment. Regression tests preserve rejection of foreign hosts and paths outside the Profile.
+
+Release `v1.0.1` requires all three native packaging jobs to pass before publication. The failed `v1.0.0` tag is retained without downloadable releases. A cross-build alone does not establish that an archive runs on its target.

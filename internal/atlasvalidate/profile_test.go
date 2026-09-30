@@ -1,6 +1,7 @@
 package atlasvalidate
 
 import (
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -279,5 +280,62 @@ func TestRootCollectionIncludesNestedRecords(t *testing.T) {
 	}
 	if r.Relations[0].TargetID != "Things/b.json" || len(r.Backlinks["Things/b.json"]) != 1 {
 		t.Fatalf("root collection lost relative path identities: %+v", r)
+	}
+}
+
+func TestSchemaFileURLPortableAbsolutePaths(t *testing.T) {
+	for _, test := range []struct{ path, want string }{
+		{"/home/user/Profile # %/schema.json", "file:///home/user/Profile%20%23%20%25/schema.json"},
+		{"C:/Users/user/Profile # %/schema.json", "file:///C:/Users/user/Profile%20%23%20%25/schema.json"},
+	} {
+		uri := schemaFileURL(test.path)
+		if got := uri.String(); got != test.want {
+			t.Fatalf("file URL = %q, want %q", got, test.want)
+		}
+		parsed, err := url.Parse(uri.String())
+		if err != nil || parsed.Host != "" || parsed.Path != uri.Path {
+			t.Fatalf("file URL changed its host or path: %v, %v", parsed, err)
+		}
+	}
+}
+
+func TestSchemaLoaderResolvesEscapedLocalPaths(t *testing.T) {
+	root := filepath.Join(t.TempDir(), "Profile # %")
+	writeFixture(t, filepath.Dir(root), "outside.schema.json", map[string]any{"type": "object"})
+	writeFixture(t, root, "schemas/entry.schema.json", map[string]any{"$ref": "defs%20%23%25.schema.json#/$defs/value"})
+	writeFixture(t, root, "schemas/defs #%.schema.json", map[string]any{"$defs": map[string]any{"value": map[string]any{"type": "string", "minLength": 1}}})
+	loader, err := newProfileLoader(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	schema, err := loader.resolve("schemas/entry.schema.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := schema.Validate("valid"); err != nil {
+		t.Fatal(err)
+	}
+	if err := schema.Validate(3); err == nil {
+		t.Fatal("nested local schema was not enforced")
+	}
+	// On Windows the real root contains a drive letter. This round trip must
+	// reach the same contained native file without treating that drive as a host.
+	uri := schemaFileURL(filepath.ToSlash(filepath.Join(loader.root, "schemas", "entry.schema.json")))
+	parsed, err := url.Parse(uri.String())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := loader.loadSchema(parsed); err != nil {
+		t.Fatalf("native file URL round trip failed: %v", err)
+	}
+	for _, forbidden := range []*url.URL{
+		{Scheme: "file", Host: "example.invalid", Path: uri.Path},
+		{Scheme: "file", Path: uri.Path, RawQuery: "source=remote"},
+		schemaFileURL(filepath.ToSlash(filepath.Join(loader.root, "..", "outside.schema.json"))),
+		{Scheme: "file", Path: filepath.ToSlash(loader.root) + "/../outside.schema.json"},
+	} {
+		if _, err := loader.loadSchema(forbidden); err == nil {
+			t.Fatalf("accepted forbidden dependency %q", forbidden)
+		}
 	}
 }

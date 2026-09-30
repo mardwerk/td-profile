@@ -104,7 +104,12 @@ func (l *profileLoader) loadSchema(uri *url.URL) (*jsonschema.Schema, error) {
 	if uri.Scheme != "file" || uri.Host != "" || uri.RawQuery != "" {
 		return nil, fmt.Errorf("schema reference %q must resolve inside the Profile; network loading is disabled", uri.String())
 	}
-	relative, err := filepath.Rel(l.root, filepath.FromSlash(uri.Path))
+	path := filepath.FromSlash(uri.Path)
+	// File URLs use /C:/... on Windows; native paths omit the initial slash.
+	if len(path) > 1 && path[0] == filepath.Separator && filepath.VolumeName(path[1:]) != "" {
+		path = path[1:]
+	}
+	relative, err := filepath.Rel(l.root, path)
 	if err != nil || !filepath.IsLocal(relative) {
 		return nil, fmt.Errorf("schema reference %q leaves the Profile directory", uri.String())
 	}
@@ -128,6 +133,14 @@ func (l *profileLoader) loadSchema(uri *url.URL) (*jsonschema.Schema, error) {
 	return &schema, nil
 }
 
+// schemaFileURL takes an absolute path with forward slashes.
+func schemaFileURL(path string) *url.URL {
+	if !strings.HasPrefix(path, "/") {
+		path = "/" + path
+	}
+	return &url.URL{Scheme: "file", Path: path}
+}
+
 func (l *profileLoader) resolve(reference string) (_ *jsonschema.Resolved, err error) {
 	defer func() {
 		if err != nil {
@@ -142,7 +155,7 @@ func (l *profileLoader) resolve(reference string) (_ *jsonschema.Resolved, err e
 	if err != nil {
 		return nil, err
 	}
-	uri := &url.URL{Scheme: "file", Path: filepath.ToSlash(path)}
+	uri := schemaFileURL(filepath.ToSlash(path))
 	schema, err := l.loadSchema(uri)
 	if err != nil {
 		return nil, err
