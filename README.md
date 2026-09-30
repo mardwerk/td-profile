@@ -9,18 +9,18 @@ A Profile Validator and reusable schemas for tower-defense game data. Each game 
 Download a native archive from [Releases](https://github.com/mardwerk/td-profile/releases) and extract it. Run from the extracted directory:
 
 ```sh
-./atlas-validator --profile profile --game-data game-data --format text
-./atlas-validator --profile profile --game-data examples/minimal-game/game-data --format text
-./atlas-validator score-tower --profile profile --game-data examples/minimal-game/game-data --tower Towers/Bolt/Bolt-0.json --format text
+./validator --profile profile --game-data game-data --format text
+./validator --profile profile --game-data examples/minimal-game/game-data --format text
+./validator score-tower --profile profile --game-data examples/minimal-game/game-data --tower Towers/Bolt/Bolt-0.json --format text
 ```
 
-Windows uses `atlas-validator.exe`. To build from a source checkout, use Go 1.23 or later:
+Windows uses `validator.exe`. To build from a source checkout, use Go 1.23 or later:
 
 ```sh
-go build -o bin/atlas-validator ./cmd/atlas-validator
-bin/atlas-validator --profile profile --game-data game-data --format text
-bin/atlas-validator --profile profile --game-data examples/minimal-game/game-data --format text
-bin/atlas-validator score-tower --profile profile --game-data examples/minimal-game/game-data --tower Towers/Bolt/Bolt-0.json --format text
+go build -o bin/validator ./cmd/validator
+bin/validator --profile profile --game-data game-data --format text
+bin/validator --profile profile --game-data examples/minimal-game/game-data --format text
+bin/validator score-tower --profile profile --game-data examples/minimal-game/game-data --tower Towers/Bolt/Bolt-0.json --format text
 ```
 
 The empty directory should report zero files. The example should pass and its Tower should score 100/100. The score measures the declared checks, not gameplay balance or simulation. Missing required states, upgrades or references fail. Unrelated files do not affect the selected Tower's score.
@@ -34,7 +34,7 @@ The empty directory should report zero files. The example should pass and its To
 | `game-data/` | Empty starting directory. |
 | `examples/minimal-game/` | Synthetic records separate from the Profile. |
 | `internal/atlasvalidate/` | Generic checking operations and tests. |
-| `cmd/atlas-validator/` | Small command entry point. |
+| `cmd/validator/` | Small command entry point. |
 | `scripts/` | Release packaging. |
 
 The starter settings use native `kind`, `id` and `familyId` fields and one upgrade path through tiers 0, 1 and 2. These are editable starting choices. A different game can change source bindings, paths, units, limits and score weights without changing the schemas. A new unsupported rule operation still requires checker code.

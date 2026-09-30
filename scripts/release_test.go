@@ -15,7 +15,7 @@ func TestArchiveRoundTrip(t *testing.T) {
 			if err := os.MkdirAll(filepath.Join(source, "game-data"), 0755); err != nil {
 				t.Fatal(err)
 			}
-			if err := os.WriteFile(filepath.Join(source, "atlas-validator"), []byte("executable"), 0755); err != nil {
+			if err := os.WriteFile(filepath.Join(source, "validator"), []byte("executable"), 0755); err != nil {
 				t.Fatal(err)
 			}
 			archive := filepath.Join(work, "release"+extension)
@@ -31,11 +31,11 @@ func TestArchiveRoundTrip(t *testing.T) {
 			if err != nil || len(entries) != 0 {
 				t.Fatalf("empty directory lost: %v, %v", entries, err)
 			}
-			contents, err := os.ReadFile(filepath.Join(bundle, "atlas-validator"))
+			contents, err := os.ReadFile(filepath.Join(bundle, "validator"))
 			if err != nil || string(contents) != "executable" {
 				t.Fatalf("file contents lost: %q, %v", contents, err)
 			}
-			info, err := os.Stat(filepath.Join(bundle, "atlas-validator"))
+			info, err := os.Stat(filepath.Join(bundle, "validator"))
 			if err != nil {
 				t.Fatal(err)
 			}

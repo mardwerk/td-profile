@@ -1,4 +1,4 @@
-// atlas-validate checks game-data against a local Profile.
+// validator checks game-data against a local Profile.
 package main
 
 import (

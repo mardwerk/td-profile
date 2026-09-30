@@ -115,11 +115,11 @@ func release(version, output string) error {
 			return fmt.Errorf("bundle %s: %w", item, err)
 		}
 	}
-	binary := "atlas-validator"
+	binary := "validator"
 	if runtime.GOOS == "windows" {
 		binary += ".exe"
 	}
-	build := exec.Command("go", "build", "-trimpath", "-o", filepath.Join(stage, binary), "./cmd/atlas-validator")
+	build := exec.Command("go", "build", "-trimpath", "-o", filepath.Join(stage, binary), "./cmd/validator")
 	build.Dir = root
 	build.Env = append(os.Environ(), "CGO_ENABLED=0", "GOOS="+runtime.GOOS, "GOARCH="+runtime.GOARCH)
 	if out, err := build.CombinedOutput(); err != nil {

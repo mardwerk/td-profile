@@ -126,7 +126,7 @@ var checkerIdentity CheckerIdentity
 
 func checker() CheckerIdentity {
 	checkerOnce.Do(func() {
-		checkerIdentity = CheckerIdentity{Name: "atlas-validate", Version: Version}
+		checkerIdentity = CheckerIdentity{Name: "validator", Version: Version}
 		if info, ok := debug.ReadBuildInfo(); ok {
 			checkerIdentity.GoVersion = info.GoVersion
 			for _, setting := range info.Settings {

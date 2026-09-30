@@ -14,7 +14,7 @@ Before public publication, run tests, race checks, vet, native builds and a rele
 
 ## Verification
 
-Tests, race checks, vet and native builds passed. All 25 reusable schemas and 17 checker implementation files match the merged Atlas source byte-for-byte. Synthetic test fixtures adapt to the new Template without relying on BTD6 settings.
+Tests, race checks, vet and native builds passed. All 25 reusable schemas match the merged Atlas source byte-for-byte. The extracted checking operations are unchanged; the command and reported checker name use `validator`. Synthetic test fixtures adapt to the new Template without relying on BTD6 settings.
 
 The empty directory passes with zero files. The synthetic game checks five files, eight references and 21 canonical model instances. Its Tower scores 100/100. Regression tests reject missing upgrades, missing states, wrong values and unknown mechanics; those failures produce partial scores. Unrelated malformed data does not change the selected Tower's report.
 

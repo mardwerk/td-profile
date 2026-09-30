@@ -12,7 +12,7 @@ func RunCLI(args []string, stdout, stderr io.Writer) int {
 	if scoring {
 		args = args[1:]
 	}
-	flags := flag.NewFlagSet("atlas-validate", flag.ContinueOnError)
+	flags := flag.NewFlagSet("validator", flag.ContinueOnError)
 	flags.SetOutput(stderr)
 	data := flags.String("data", "", "raw game-data directory")
 	gameData := flags.String("game-data", "", "game-data directory")
@@ -35,10 +35,10 @@ func RunCLI(args []string, stdout, stderr io.Writer) int {
 	}
 	if (scoring && (*gameData == "" || *tower == "")) || (!scoring && *tower != "") || *data == "" || *profile == "" || flags.NArg() != 0 || (*format != "json" && *format != "text") || (*relations && *format != "json") {
 		if scoring {
-			fmt.Fprintln(stderr, "Usage: atlas-validator score-tower --game-data <path> --profile <path> --tower <path> [--format json|text] [--relations]")
+			fmt.Fprintln(stderr, "Usage: validator score-tower --game-data <path> --profile <path> --tower <path> [--format json|text] [--relations]")
 			return 2
 		}
-		fmt.Fprintln(stderr, "Usage: atlas-validate --data <game-data> --profile <profile> [--format json|text] [--relations]")
+		fmt.Fprintln(stderr, "Usage: validator --data <game-data> --profile <profile> [--format json|text] [--relations]")
 		return 2
 	}
 	var result Report

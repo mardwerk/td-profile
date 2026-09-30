@@ -72,7 +72,7 @@ func TestCLI(t *testing.T) {
 		t.Fatalf("CLI exit=%d, output=%s, stderr=%s", status, stdout.String(), stderr.String())
 	}
 	var report atlasvalidate.Report
-	if err := json.Unmarshal(stdout.Bytes(), &report); err != nil || !report.Valid || report.Profile == nil || report.Checker.Version == "" {
+	if err := json.Unmarshal(stdout.Bytes(), &report); err != nil || !report.Valid || report.Profile == nil || report.Checker.Version == "" || report.Checker.Name != "validator" {
 		t.Fatalf("invalid report: %s", stdout.String())
 	}
 	stdout.Reset()
