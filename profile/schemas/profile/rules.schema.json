@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Semantic validation rules",
+  "description": "Rule operations must be implemented by the checker. Unknown operations are errors.",
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tiersField": {
+            "type": "string",
+            "minLength": 1
+          },
+          "familyField": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limits": {
+            "type": "object",
+            "properties": {
+              "pathCount": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxTier": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxPurchasedPaths": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "secondaryTierLimit": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxPathsAboveSecondaryTier": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "pathCount",
+              "maxTier",
+              "maxPurchasedPaths",
+              "secondaryTierLimit",
+              "maxPathsAboveSecondaryTier"
+            ],
+            "additionalProperties": false
+          },
+          "requireCompleteStates": {
+            "type": "boolean"
+          },
+          "levelField": {
+            "type": "string",
+            "minLength": 1
+          },
+          "levels": {
+            "type": "object",
+            "properties": {
+              "first": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "last": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "first",
+              "last"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "operation",
+          "scope",
+          "familyField",
+          "requireCompleteStates"
+        ],
+        "additionalProperties": false,
+        "oneOf": [
+          {
+            "properties": {
+              "operation": {
+                "const": "purchaseProgression"
+              }
+            },
+            "required": [
+              "tiersField",
+              "limits"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "levelField"
+                  ]
+                },
+                {
+                  "required": [
+                    "levels"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "properties": {
+              "operation": {
+                "const": "linearProgression"
+              }
+            },
+            "required": [
+              "levelField",
+              "levels"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "tiersField"
+                  ]
+                },
+                {
+                  "required": [
+                    "limits"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "selectors": {
+      "$ref": "selectors.schema.json"
+    }
+  },
+  "required": [
+    "rules"
+  ],
+  "additionalProperties": false
+}

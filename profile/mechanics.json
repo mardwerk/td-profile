@@ -1,0 +1,191 @@
+{
+  "typeIdentity": {
+    "field": "kind",
+    "encoding": "literal"
+  },
+  "unknownModels": "error",
+  "mechanics": [
+    {
+      "id": "tower",
+      "models": [
+        "tower"
+      ],
+      "schema": "schemas/game-data/tower.schema.json",
+      "role": "structure",
+      "fields": {
+        "id": "id",
+        "familyId": "familyId",
+        "placementPrice": "placementPrice",
+        "range": "range",
+        "buildTiers": "buildTiers",
+        "upgradeOptions": "upgradeOptions",
+        "appliedUpgrades": "appliedUpgrades",
+        "behaviors": "behaviors",
+        "isBase": "isBase"
+      },
+      "requiredFields": [
+        "id",
+        "familyId",
+        "placementPrice",
+        "range",
+        "buildTiers",
+        "upgradeOptions",
+        "appliedUpgrades",
+        "behaviors",
+        "isBase"
+      ]
+    },
+    {
+      "id": "upgrade",
+      "models": [
+        "upgrade"
+      ],
+      "schema": "schemas/game-data/upgrade.schema.json",
+      "role": "progression",
+      "fields": {
+        "id": "id",
+        "price": "price",
+        "pathIndex": "pathIndex",
+        "tier": "tier"
+      },
+      "requiredFields": [
+        "id",
+        "price",
+        "pathIndex",
+        "tier"
+      ]
+    },
+    {
+      "id": "purchase",
+      "models": [
+        "purchase"
+      ],
+      "schema": "schemas/game-data/purchase.schema.json",
+      "role": "progression",
+      "fields": {
+        "targetTower": "targetTower",
+        "upgradeId": "upgradeId"
+      },
+      "requiredFields": [
+        "targetTower",
+        "upgradeId"
+      ]
+    },
+    {
+      "id": "attack",
+      "models": [
+        "attack"
+      ],
+      "schema": "schemas/game-data/attack.schema.json",
+      "role": "structure",
+      "fields": {
+        "range": "range",
+        "weapons": "weapons"
+      },
+      "requiredFields": [
+        "range",
+        "weapons"
+      ]
+    },
+    {
+      "id": "weapon",
+      "models": [
+        "weapon"
+      ],
+      "schema": "schemas/game-data/weapon.schema.json",
+      "role": "trigger",
+      "fields": {
+        "interval": "interval",
+        "projectile": "projectile"
+      },
+      "requiredFields": [
+        "interval",
+        "projectile"
+      ]
+    },
+    {
+      "id": "projectile",
+      "models": [
+        "projectile"
+      ],
+      "schema": "schemas/game-data/projectile.schema.json",
+      "role": "delivery",
+      "fields": {
+        "hitCapacity": "hitCapacity",
+        "behaviors": "behaviors"
+      },
+      "requiredFields": [
+        "hitCapacity",
+        "behaviors"
+      ]
+    },
+    {
+      "id": "damage",
+      "models": [
+        "damage"
+      ],
+      "schema": "schemas/game-data/damage.schema.json",
+      "role": "effect",
+      "fields": {
+        "amount": "amount"
+      },
+      "requiredFields": [
+        "amount"
+      ]
+    },
+    {
+      "id": "ability",
+      "models": [
+        "ability"
+      ],
+      "schema": "schemas/game-data/ability.schema.json",
+      "role": "ability",
+      "fields": {
+        "cooldown": "cooldown",
+        "behaviors": "behaviors"
+      },
+      "requiredFields": [
+        "cooldown",
+        "behaviors"
+      ]
+    },
+    {
+      "id": "enemy",
+      "models": [
+        "enemy"
+      ],
+      "schema": "schemas/game-data/enemy.schema.json",
+      "role": "structure",
+      "fields": {
+        "id": "id",
+        "familyId": "familyId",
+        "maxHealth": "maxHealth",
+        "speed": "speed",
+        "behaviors": "behaviors"
+      },
+      "requiredFields": [
+        "id",
+        "familyId",
+        "maxHealth",
+        "speed",
+        "behaviors"
+      ]
+    },
+    {
+      "id": "map",
+      "models": [
+        "map"
+      ],
+      "schema": "schemas/game-data/map.schema.json",
+      "role": "structure",
+      "fields": {
+        "id": "id",
+        "difficulty": "difficulty"
+      },
+      "requiredFields": [
+        "id",
+        "difficulty"
+      ]
+    }
+  ]
+}

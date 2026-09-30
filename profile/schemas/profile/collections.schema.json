@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Collections and purchase graph scopes",
+  "type": "object",
+  "properties": {
+    "collections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "idField": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "depth": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "parentField": {
+                "type": "string",
+                "minLength": 1
+              },
+              "stemField": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "depth"
+            ],
+            "additionalProperties": false
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "requireWhen": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "collection": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "selectorSchema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "models": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "field": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "selector": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [],
+              "additionalProperties": false,
+              "oneOf": [
+                {
+                  "required": [
+                    "collection"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "models"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "field"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "models",
+                    "field"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "collection"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "selectorSchema"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "selector"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "allOf": [
+                {
+                  "not": {
+                    "required": [
+                      "selector",
+                      "selectorSchema"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "typed": {
+            "type": "boolean",
+            "description": "Require a root model discriminator using the configured type identity field."
+          },
+          "excludedKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "description": "Exact root keys excluded from @keys record identities."
+          }
+        },
+        "required": [
+          "name",
+          "path",
+          "idField",
+          "schema"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "collection": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rootSchema": {
+            "type": "string",
+            "minLength": 1
+          },
+          "edgesField": {
+            "type": "string",
+            "minLength": 1
+          },
+          "targetField": {
+            "type": "string",
+            "minLength": 1
+          },
+          "memberSchema": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rootSelector": {
+            "type": "string",
+            "minLength": 1
+          },
+          "memberSelector": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "name",
+          "collection",
+          "edgesField",
+          "targetField"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "required": [
+                  "rootSchema"
+                ],
+                "not": {
+                  "required": [
+                    "rootSelector"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "rootSelector"
+                ],
+                "not": {
+                  "required": [
+                    "rootSchema"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "oneOf": [
+              {
+                "required": [
+                  "memberSchema"
+                ],
+                "not": {
+                  "required": [
+                    "memberSelector"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "memberSelector"
+                ],
+                "not": {
+                  "required": [
+                    "memberSchema"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "unmatchedFiles": {
+      "type": "string",
+      "enum": [
+        "report",
+        "error"
+      ]
+    }
+  },
+  "required": [
+    "collections",
+    "scopes"
+  ],
+  "additionalProperties": false
+}

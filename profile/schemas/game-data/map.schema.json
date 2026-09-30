@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Map model",
+  "type": "object",
+  "required": [
+    "kind",
+    "id"
+  ],
+  "properties": {
+    "kind": {
+      "const": "map"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "difficulty": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

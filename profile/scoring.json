@@ -1,0 +1,12 @@
+{
+  "collection": "towers",
+  "familyField": "familyId",
+  "weights": {
+    "schema": 1,
+    "layout": 1,
+    "references": 1,
+    "rules": 1,
+    "units": 1,
+    "mechanics": 1
+  }
+}

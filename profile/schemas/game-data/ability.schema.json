@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ability model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "ability"
+    },
+    "id": {
+      "type": "string"
+    },
+    "cooldown": {
+      "type": "number"
+    },
+    "behaviors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    },
+    "sourceUpgrade": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

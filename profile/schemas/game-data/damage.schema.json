@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Damage model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "damage"
+    },
+    "id": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "maximumAmount": {
+      "type": "number"
+    },
+    "immunityMask": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": true
+}

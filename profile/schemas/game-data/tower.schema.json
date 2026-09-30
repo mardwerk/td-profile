@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tower model",
+  "type": "object",
+  "required": [
+    "kind",
+    "id"
+  ],
+  "properties": {
+    "kind": {
+      "const": "tower"
+    },
+    "id": {
+      "type": "string"
+    },
+    "familyId": {
+      "type": "string"
+    },
+    "placementPrice": {
+      "type": "number",
+      "minimum": 0
+    },
+    "range": {
+      "type": "number"
+    },
+    "buildTiers": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "category": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "upgradeOptions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "purchase.schema.json"
+      }
+    },
+    "appliedUpgrades": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "behaviors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    },
+    "isAdvanced": {
+      "type": "boolean"
+    },
+    "advancedUpgrade": {
+      "anyOf": [
+        {
+          "$ref": "purchase.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "placementAreas": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "integer"
+        ]
+      }
+    },
+    "isBase": {
+      "type": "boolean"
+    },
+    "isSubordinate": {
+      "type": "boolean"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": true
+}

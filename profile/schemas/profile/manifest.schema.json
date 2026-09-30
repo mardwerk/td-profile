@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas Profile manifest",
+  "type": "object",
+  "properties": {
+    "formatVersion": {
+      "const": 5
+    },
+    "validatorFormatVersion": {
+      "const": 5
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "game": {
+      "type": "string",
+      "minLength": 1
+    },
+    "documents": {
+      "type": "object",
+      "properties": {
+        "collections": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "references": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "mechanics": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "rules": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "numericalUnits": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "scoring": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "classifications": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        },
+        "modelContracts": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "schema"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "collections",
+        "references",
+        "mechanics",
+        "rules",
+        "numericalUnits",
+        "scoring"
+      ],
+      "additionalProperties": false
+    },
+    "proposalSchema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "captureMetadata": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minProperties": 1
+        },
+        "base": {
+          "enum": [
+            "gameData",
+            "parent"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "fields",
+        "base"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "formatVersion",
+    "validatorFormatVersion",
+    "id",
+    "revision",
+    "game",
+    "documents",
+    "proposalSchema"
+  ],
+  "additionalProperties": false
+}

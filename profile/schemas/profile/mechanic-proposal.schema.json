@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Separate mechanic proposal",
+  "description": "A proposed catalog entry and its rationale. Proposal files are not active gameplay records or catalog entries.",
+  "type": "object",
+  "properties": {
+    "mechanic": {
+      "$ref": "mechanics.schema.json#/$defs/mechanic"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "mechanic",
+    "reason"
+  ],
+  "additionalProperties": false
+}

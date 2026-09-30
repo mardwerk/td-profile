@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Round model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "round"
+    },
+    "id": {
+      "type": "string"
+    },
+    "groups": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "round.schema.json#/$defs/enemyGroup"
+      }
+    },
+    "emissions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "enemyGroup": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "enemyGroup"
+        },
+        "id": {
+          "type": "string"
+        },
+        "enemyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "tower",
+  "id": "Bolt-1",
+  "familyId": "Bolt",
+  "placementPrice": 100,
+  "range": 20,
+  "buildTiers": [
+    1
+  ],
+  "isBase": false,
+  "upgradeOptions": [
+    {
+      "kind": "purchase",
+      "targetTower": "Bolt-2",
+      "upgradeId": "Power-2"
+    }
+  ],
+  "appliedUpgrades": [
+    "Power-1"
+  ],
+  "behaviors": [
+    {
+      "kind": "attack",
+      "range": 20,
+      "weapons": [
+        {
+          "kind": "weapon",
+          "interval": 1,
+          "projectile": {
+            "kind": "projectile",
+            "hitCapacity": 1,
+            "behaviors": [
+              {
+                "kind": "damage",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

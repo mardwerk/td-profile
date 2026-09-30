@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Weapon model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "weapon"
+    },
+    "id": {
+      "type": "string"
+    },
+    "interval": {
+      "type": "number"
+    },
+    "projectile": {
+      "anyOf": [
+        {
+          "$ref": "projectile.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "emission": {
+      "anyOf": [
+        {
+          "$ref": "model.schema.json#/$defs/model"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "behaviors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    }
+  },
+  "additionalProperties": true
+}

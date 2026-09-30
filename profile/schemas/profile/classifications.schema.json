@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "string",
+            "minLength": 1
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "selectorSchema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "rule": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "membership": {
+                  "enum": [
+                    "checked",
+                    "unchecked"
+                  ]
+                },
+                "validation": {
+                  "enum": [
+                    "progression",
+                    "schemaAndReferences"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "selector": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "id",
+                "validation"
+              ],
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "required": [
+                      "rule"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "membership"
+                    ]
+                  },
+                  "else": {
+                    "not": {
+                      "required": [
+                        "membership"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "validation": {
+                        "const": "progression"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "rule"
+                    ],
+                    "properties": {
+                      "membership": {
+                        "const": "checked"
+                      }
+                    }
+                  },
+                  "else": {
+                    "required": [
+                      "reason"
+                    ]
+                  }
+                },
+                {
+                  "oneOf": [
+                    {
+                      "required": [
+                        "selectorSchema"
+                      ],
+                      "not": {
+                        "required": [
+                          "selector"
+                        ]
+                      }
+                    },
+                    {
+                      "required": [
+                        "selector"
+                      ],
+                      "not": {
+                        "required": [
+                          "selectorSchema"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "collection",
+          "types"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "groups"
+  ],
+  "additionalProperties": false
+}

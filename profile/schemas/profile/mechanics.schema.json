@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Mechanics catalog",
+  "description": "Binds raw model classes to validation schemas. Catalog membership declares structural coverage, not behavior simulation.",
+  "type": "object",
+  "properties": {
+    "unknownModels": {
+      "enum": [
+        "report",
+        "error"
+      ]
+    },
+    "mechanics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mechanic"
+      },
+      "minItems": 1
+    },
+    "typeIdentity": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "encoding": {
+          "enum": [
+            "dotnet",
+            "literal"
+          ]
+        }
+      },
+      "required": [
+        "field",
+        "encoding"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "unknownModels",
+    "mechanics",
+    "typeIdentity"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "mechanic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "structure",
+            "trigger",
+            "targeting",
+            "delivery",
+            "collision",
+            "effect",
+            "ability",
+            "progression",
+            "presentation"
+          ]
+        },
+        "fields": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "minLength": 1,
+            "not": {
+              "const": "kind"
+            }
+          },
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredFields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "models",
+        "schema",
+        "role"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

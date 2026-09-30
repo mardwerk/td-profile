@@ -1,0 +1,98 @@
+{
+  "units": [
+    {
+      "id": "credits",
+      "dimension": "currency",
+      "description": "Game currency."
+    },
+    {
+      "id": "seconds",
+      "dimension": "time",
+      "description": "Elapsed seconds."
+    },
+    {
+      "id": "distance",
+      "dimension": "distance",
+      "description": "Game distance units."
+    },
+    {
+      "id": "count",
+      "dimension": "count",
+      "description": "Discrete count."
+    }
+  ],
+  "bindings": [
+    {
+      "models": [
+        "tower"
+      ],
+      "field": "placementPrice",
+      "unit": "credits",
+      "meaning": "placementPrice in credits."
+    },
+    {
+      "models": [
+        "upgrade"
+      ],
+      "field": "price",
+      "unit": "credits",
+      "meaning": "price in credits."
+    },
+    {
+      "models": [
+        "tower"
+      ],
+      "field": "range",
+      "unit": "distance",
+      "meaning": "range in distance."
+    },
+    {
+      "models": [
+        "attack"
+      ],
+      "field": "range",
+      "unit": "distance",
+      "meaning": "range in distance."
+    },
+    {
+      "models": [
+        "weapon"
+      ],
+      "field": "interval",
+      "unit": "seconds",
+      "meaning": "interval in seconds."
+    },
+    {
+      "models": [
+        "ability"
+      ],
+      "field": "cooldown",
+      "unit": "seconds",
+      "meaning": "cooldown in seconds."
+    },
+    {
+      "models": [
+        "damage"
+      ],
+      "field": "amount",
+      "unit": "count",
+      "meaning": "amount in count."
+    },
+    {
+      "models": [
+        "projectile"
+      ],
+      "field": "hitCapacity",
+      "unit": "count",
+      "meaning": "hitCapacity in count."
+    },
+    {
+      "models": [
+        "enemy"
+      ],
+      "field": "maxHealth",
+      "unit": "count",
+      "meaning": "maxHealth in count."
+    }
+  ]
+}

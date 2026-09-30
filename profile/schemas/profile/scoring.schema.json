@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "collection": {
+      "type": "string",
+      "minLength": 1
+    },
+    "familyField": {
+      "type": "string",
+      "minLength": 1
+    },
+    "weights": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "layout": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "references": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "rules": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "units": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "mechanics": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "schema",
+        "layout",
+        "references",
+        "rules",
+        "units",
+        "mechanics"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "collection",
+    "familyField",
+    "weights"
+  ],
+  "additionalProperties": false
+}

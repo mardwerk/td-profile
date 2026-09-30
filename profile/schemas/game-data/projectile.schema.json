@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Projectile model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "projectile"
+    },
+    "id": {
+      "type": "string"
+    },
+    "hitCapacity": {
+      "type": "number"
+    },
+    "maximumHitCapacity": {
+      "type": "number"
+    },
+    "behaviors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    }
+  },
+  "additionalProperties": true
+}

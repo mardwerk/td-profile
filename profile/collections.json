@@ -1,0 +1,60 @@
+{
+  "collections": [
+    {
+      "name": "towers",
+      "path": "Towers",
+      "idField": "id",
+      "schema": "schemas/game-data/tower.schema.json",
+      "typed": true,
+      "layout": {
+        "depth": 2,
+        "parentField": "familyId",
+        "stemField": "id"
+      }
+    },
+    {
+      "name": "upgrades",
+      "path": "Upgrades",
+      "idField": "id",
+      "schema": "schemas/game-data/upgrade.schema.json",
+      "typed": true,
+      "layout": {
+        "depth": 1,
+        "stemField": "id"
+      }
+    },
+    {
+      "name": "maps",
+      "path": "Maps",
+      "idField": "id",
+      "schema": "schemas/game-data/map.schema.json",
+      "typed": true,
+      "layout": {
+        "depth": 1,
+        "stemField": "id"
+      }
+    },
+    {
+      "name": "enemies",
+      "path": "Enemies",
+      "idField": "id",
+      "schema": "schemas/game-data/enemy.schema.json",
+      "typed": true,
+      "layout": {
+        "depth": 1,
+        "stemField": "id"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "name": "towerStates",
+      "collection": "towers",
+      "rootSelector": "base",
+      "memberSelector": "member",
+      "edgesField": "upgradeOptions",
+      "targetField": "targetTower"
+    }
+  ],
+  "unmatchedFiles": "error"
+}

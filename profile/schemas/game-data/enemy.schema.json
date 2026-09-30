@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Enemy model",
+  "type": "object",
+  "required": [
+    "kind",
+    "id"
+  ],
+  "properties": {
+    "kind": {
+      "const": "enemy"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "familyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "behaviors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    },
+    "maxHealth": {
+      "type": "number"
+    },
+    "speed": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Purchase model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "purchase"
+    },
+    "id": {
+      "type": "string"
+    },
+    "targetTower": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upgradeId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}

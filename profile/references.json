@@ -1,0 +1,32 @@
+{
+  "references": [
+    {
+      "models": [
+        "purchase"
+      ],
+      "field": "targetTower",
+      "target": "towers"
+    },
+    {
+      "models": [
+        "purchase"
+      ],
+      "field": "upgradeId",
+      "target": "upgrades"
+    },
+    {
+      "models": [
+        "tower"
+      ],
+      "field": "appliedUpgrades",
+      "target": "upgrades"
+    },
+    {
+      "models": [
+        "ability"
+      ],
+      "field": "sourceUpgrade",
+      "target": "upgrades"
+    }
+  ]
+}

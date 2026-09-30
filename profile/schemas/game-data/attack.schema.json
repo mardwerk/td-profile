@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Attack model",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "const": "attack"
+    },
+    "id": {
+      "type": "string"
+    },
+    "weapons": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "weapon.schema.json"
+      }
+    },
+    "range": {
+      "type": "number"
+    },
+    "behaviors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "model.schema.json#/$defs/model"
+      }
+    }
+  },
+  "additionalProperties": true
+}

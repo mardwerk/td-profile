@@ -1,0 +1,34 @@
+{
+  "formatVersion": 5,
+  "validatorFormatVersion": 5,
+  "id": "profile-template",
+  "revision": "1.0.0",
+  "game": "your-game",
+  "documents": {
+    "collections": {
+      "file": "collections.json",
+      "schema": "schemas/profile/collections.schema.json"
+    },
+    "references": {
+      "file": "references.json",
+      "schema": "schemas/profile/references.schema.json"
+    },
+    "mechanics": {
+      "file": "mechanics.json",
+      "schema": "schemas/profile/mechanics.schema.json"
+    },
+    "rules": {
+      "file": "rules.json",
+      "schema": "schemas/profile/rules.schema.json"
+    },
+    "numericalUnits": {
+      "file": "numerical-units.json",
+      "schema": "schemas/profile/numerical-units.schema.json"
+    },
+    "scoring": {
+      "file": "scoring.json",
+      "schema": "schemas/profile/scoring.schema.json"
+    }
+  },
+  "proposalSchema": "schemas/profile/mechanic-proposal.schema.json"
+}

@@ -1,0 +1,38 @@
+{
+  "selectors": {
+    "member": {
+      "fields": {
+        "kind": [
+          "tower"
+        ]
+      }
+    },
+    "base": {
+      "all": [
+        "member"
+      ],
+      "fields": {
+        "isBase": [
+          true
+        ]
+      }
+    }
+  },
+  "rules": [
+    {
+      "id": "tower-progression",
+      "operation": "purchaseProgression",
+      "scope": "towerStates",
+      "tiersField": "buildTiers",
+      "familyField": "familyId",
+      "limits": {
+        "pathCount": 1,
+        "maxTier": 2,
+        "maxPurchasedPaths": 1,
+        "secondaryTierLimit": 2,
+        "maxPathsAboveSecondaryTier": 0
+      },
+      "requireCompleteStates": true
+    }
+  ]
+}
